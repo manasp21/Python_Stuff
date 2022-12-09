@@ -51,3 +51,33 @@ class DifferentRotations(Scene):
             left_square.animate.rotate(PI), Rotate(right_square, angle=PI), run_time=2
         )
         self.wait()
+
+def construct(self):
+    # play the first animations...
+    # you don't need a section in the very beginning as it gets created automatically
+    self.next_section()
+    # play more animations...
+    self.next_section("this is an optional name that doesn't have to be unique")
+    # play even more animations...
+    self.next_section("this is a section without any animations, it will be removed")
+
+def construct(self):
+    self.next_section()
+    # this section doesn't have any animations and will be removed
+    # but no error will be thrown
+    # feel free to tend your flock of empty sections if you so desire
+    self.add(Circle())
+    self.next_section()
+
+def construct(self):
+    self.next_section()
+    self.add(Circle())
+    # now we wait 1sec and have an animation to satisfy the section
+    self.wait()
+    self.next_section()
+
+def construct(self):
+    self.next_section(skip_animations=True)
+    # play some animations that shall be skipped...
+    self.next_section()
+    # play some animations that won't get skipped...
