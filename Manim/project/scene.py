@@ -42,7 +42,6 @@ class AnimatedSquareToCircle(Scene):
         self.play(
             circle.animate.set_fill(PINK, opacity=0.5)
         )  # color the circle on screen
-
 class DifferentRotations(Scene):
     def construct(self):
         left_square = Square(color=BLUE, fill_opacity=0.7).shift(2 * LEFT)
@@ -52,32 +51,10 @@ class DifferentRotations(Scene):
         )
         self.wait()
 
-def construct(self):
-    # play the first animations...
-    # you don't need a section in the very beginning as it gets created automatically
-    self.next_section()
-    # play more animations...
-    self.next_section("this is an optional name that doesn't have to be unique")
-    # play even more animations...
-    self.next_section("this is a section without any animations, it will be removed")
-
-def construct(self):
-    self.next_section()
-    # this section doesn't have any animations and will be removed
-    # but no error will be thrown
-    # feel free to tend your flock of empty sections if you so desire
-    self.add(Circle())
-    self.next_section()
-
-def construct(self):
-    self.next_section()
-    self.add(Circle())
-    # now we wait 1sec and have an animation to satisfy the section
-    self.wait()
-    self.next_section()
-
-def construct(self):
-    self.next_section(skip_animations=True)
-    # play some animations that shall be skipped...
-    self.next_section()
-    # play some animations that won't get skipped...
+class ContinuousMotion(Scene):
+    def construct(self):
+        func = lambda pos: np.sin(pos[0] / 2) * UR + np.cos(pos[1] / 2) * LEFT
+        stream_lines = StreamLines(func, stroke_width=2, max_anchors_per_line=30)
+        self.add(stream_lines)
+        stream_lines.start_animation(warm_up=False, flow_speed=1.5)
+        self.wait(stream_lines.virtual_time / stream_lines.flow_speed)
